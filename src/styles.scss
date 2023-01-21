@@ -1,5 +1,6 @@
 @import "colors";
 @import "fonts";
+@import "sizes";
 
 // Reset
 /* Box sizing rules */
@@ -41,7 +42,7 @@ body {
   line-height: 1.5;
   background-color: $primary-background-color;
   color: $primary-text-color;
-  font-size: 16px;
+  font-size: $font-default;
   font-family: Poppins, 'Courier New', Courier, monospace;
   font-weight: 400;
 }
