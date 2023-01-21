@@ -1,0 +1,9 @@
+@import "colors";
+@import "sizes";
+
+.app-text-input {
+  height: $input-height;
+  padding: 0 $extra-extra-small-space;
+  border: $medium-border solid $placeholder-border-color;
+  font-size: $font-large;
+}
