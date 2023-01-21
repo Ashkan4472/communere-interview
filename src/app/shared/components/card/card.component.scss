@@ -1,0 +1,32 @@
+@import "colors";
+@import "sizes";
+
+.app-card {
+  width: 100%;
+  height: 100%;
+
+  border: solid $medium_border $primary-border-color;
+  border-radius: $small-radius;
+}
+
+.app-card-title-container {
+  width: 100%;
+  height: $card_title_height;
+
+  display: flex;
+  align-items: center;
+
+  border-top-left-radius: $extra_small_radius;
+  border-top-right-radius: $extra_small_radius;
+
+  color: $primary-background-color;
+  background-color: $primary-border-color;
+
+  .app-card-title {
+    margin-left: $small_space;
+  }
+}
+
+.app-card-body-container {
+  padding: $small_space $medium_space;
+}
