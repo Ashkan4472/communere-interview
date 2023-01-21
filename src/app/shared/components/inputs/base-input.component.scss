@@ -1,0 +1,12 @@
+@import "sizes";
+
+.app-base-input {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .app-base-input-title {
+    font-size: $font-large;
+    font-weight: 500;
+  }
+}
