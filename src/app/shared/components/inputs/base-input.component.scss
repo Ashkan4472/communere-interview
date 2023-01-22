@@ -3,10 +3,18 @@
 .app-base-input {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+
+  margin-bottom: $small-space;
 
   .app-base-input-title {
+    width: 100%;
+    margin-top: $extra-small-space;
+
     font-size: $font-large;
     font-weight: 500;
+  }
+
+  .app-base-input-body {
+    width: clamp($min-size, 100%, $max-size);
   }
 }
