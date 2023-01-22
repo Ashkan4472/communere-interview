@@ -1,5 +1,6 @@
 <div
   class="app-map"
+  [ngClass]="{'app-map': !useAspectRatio, 'app-map-aspect-ratio': useAspectRatio}"
   leaflet
   [leafletOptions]="options"
   (leafletClick)="onMapClicked($event)"

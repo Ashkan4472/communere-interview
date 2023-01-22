@@ -23,6 +23,7 @@ import { MapService } from "./map.service";
 export class MapComponent implements OnInit {
   @Input() locations: Location[] = [];
   @Input() disableMarkerOnClick: boolean = true;
+  @Input() useAspectRatio: boolean = false;
   @Output() mapClicked?: EventEmitter<LatLng>;
 
   options!: MapOptions;
