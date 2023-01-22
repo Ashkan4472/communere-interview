@@ -1,4 +1,4 @@
-<div class="app-card">
+<div class="app-card" [ngClass]="{'app-card-success': type === 'success'}">
   <div class="app-card-title-container">
     <h1 class="app-card-title">{{ title }}</h1>
   </div>

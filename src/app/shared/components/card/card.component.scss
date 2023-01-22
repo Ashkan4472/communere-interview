@@ -30,3 +30,12 @@
 .app-card-body-container {
   padding: $small_space $medium_space;
 }
+
+.app-card-success {
+  border: solid $medium_border $success-border-color;
+
+  .app-card-title-container {
+    color: $success-text-color;
+    background-color: $success-border-color;
+  }
+}
