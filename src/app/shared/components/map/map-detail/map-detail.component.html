@@ -1,0 +1,32 @@
+<div class="app-map-detail">
+
+  <app-card [title]="title" type="success">
+    <ul class="app-map-detail-body">
+      <li>
+        <strong>LatLng: </strong>
+        <span>{{ location.latLng }}</span>
+      </li>
+
+      <li *ngIf="location.name">
+        <strong>Name: </strong>
+        <span>{{ location.name }}</span>
+      </li>
+
+      <li>
+        <strong>Type: </strong>
+        <span>{{ location.locType }}</span>
+      </li>
+
+      <li *ngIf="location.logo">
+        <strong>Logo: </strong>
+        <span>{{ location.logo }}</span>
+      </li>
+    </ul>
+  </app-card>
+
+
+  <div class="app-map-detail-buttons">
+    <app-button title="Edit" type="warn"></app-button>
+    <app-button title="Close" (click)="closePopup()"></app-button>
+  </div>
+</div>

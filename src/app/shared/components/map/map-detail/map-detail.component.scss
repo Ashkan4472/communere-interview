@@ -1,0 +1,31 @@
+@import "sizes";
+
+.app-map-detail {
+  .app-map-detail-body {
+    padding: 0;
+    list-style-type: none;
+
+    li {
+      margin-bottom: $extra-small-space;
+
+      strong {
+        font-size: $font-large;
+      }
+      span {
+        font-size: $font-default;
+      }
+    }
+  }
+
+
+  .app-map-detail-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+
+    * {
+      margin: $extra-small-space;
+    }
+  }
+}

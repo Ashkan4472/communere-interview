@@ -8,17 +8,25 @@ $light-blue: #5dbfde;
 $dark-blue: #448bc9;
 $darkest-blue: #1b78d2;
 
+$light-green: #e1f0d8;
+$green: #5eb961;
+
+$dark-orange: #edad52;
+
 $primary-background-color: $white;
 
 // Border
 $primary-border-color: $dark-blue;
 $secondary-border-color: $darkest-blue;
 $placeholder-border-color: $gray;
+$success-border-color: $light-green;
 
 // Text
 $primary-text-color: $black;
 $placeholder-text-color: $dark-gray;
+$success-text-color: $green;
 
 // Button
 $primary-button-color: $light-blue;
 $secondary-button-color: $gray;
+$warn-button-color: $dark-orange;
