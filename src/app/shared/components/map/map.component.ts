@@ -24,16 +24,12 @@ export class MapComponent implements OnInit {
   @Input() locations: Location[] = [];
   @Input() disableMarkerOnClick: boolean = true;
   @Input() useAspectRatio: boolean = false;
-  @Output() mapClicked?: EventEmitter<LatLng>;
+  @Output() mapClicked = new EventEmitter<LatLng>();
 
   options!: MapOptions;
   preservedLocation?: Location
 
-  constructor(private mapService: MapService) {
-    if (!this.disableMarkerOnClick) {
-      this.mapClicked = new EventEmitter<LatLng>()
-    }
-  }
+  constructor(private mapService: MapService) { }
 
   ngOnInit(): void {
     this.options = {
