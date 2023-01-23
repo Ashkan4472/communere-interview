@@ -25,28 +25,31 @@ export class MapService {
 
   addMarker(location: Location, addPopup = true) {
     if (addPopup) {
-      location.marker.bindPopup((_l) => this.createDetailPopup(location))
+      location.marker?.bindPopup((_l) => this.createDetailPopup(location))
     }
-    location.marker.addTo(this.map!)
+    location.marker?.addTo(this.map!)
   }
 
-  removeMarker(marker: L.Marker) {
-    marker.remove();
+  removeMarker(marker?: L.Marker) {
+    marker?.remove();
   }
 
   detectMarkerChanges(changes: SimpleChanges, disableMarkerOnClick: boolean) {
+    if (changes['locations'].isFirstChange()) {
+      return;
+    }
     const currentLocations = changes['locations'].currentValue as Location[]
-    const previousLocations = changes['locations'].previousValue as Location[]
+    const previousLocations = changes['locations'].previousValue as (Location[] | undefined);
 
-    const removedMarkers = previousLocations?.filter(x => !currentLocations.includes(x)) ?? [];
-    const newMarkers = currentLocations?.filter(x => !previousLocations.includes(x)) ?? [];
+    const removedLocations = previousLocations?.filter(x => !currentLocations.includes(x)) ?? [];
+    const newLocations = currentLocations?.filter(x => !previousLocations?.includes(x)) ?? [];
 
-    for (const m of newMarkers) {
-      this.addMarker(m, disableMarkerOnClick);
+    for (const l of newLocations) {
+      this.addMarker(l, disableMarkerOnClick);
     }
 
-    for (const m of removedMarkers) {
-      this.removeMarker(m.marker);
+    for (const l of removedLocations) {
+      this.removeMarker(l.marker);
     }
   }
 

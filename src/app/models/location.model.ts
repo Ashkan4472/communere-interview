@@ -3,17 +3,19 @@ import { v4 as uuid4 } from "uuid";
 import * as L from "leaflet";
 
 export class Location {
-  private _id!: string;
-  marker: L.Marker;
+  private _id: string;
+  marker?: L.Marker;
 
   constructor(
-    public latLng: L.LatLngTuple = [0, 0],
-    public locType: LocationType = LocationType.BUSINESS,
-    public name: string = "",
-    public logo: string = "",
+    public latLng?: L.LatLngTuple,
+    public locType?: LocationType,
+    public name?: string,
+    public logo?: string,
   ) {
     this._id = uuid4()
-    this.marker = L.marker(latLng, { interactive: true });
+    if (latLng) {
+      this.marker = L.marker(latLng, { interactive: true });
+    }
   }
 
   get id() {
