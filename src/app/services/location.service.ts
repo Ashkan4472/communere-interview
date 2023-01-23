@@ -3,7 +3,9 @@ import { BehaviorSubject, Observable } from "rxjs";
 import { LOC_IDS, LOC_ID_PREFIX } from "../constants/keys/localstorage.keys";
 import { Location } from "../models/location.model";
 
-@Injectable()
+@Injectable({
+  providedIn: "root",
+})
 export class LocationService {
   private locationSubject: BehaviorSubject<Location[]>;
   locations$: Observable<Location[]>;
