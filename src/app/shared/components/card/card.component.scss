@@ -24,11 +24,19 @@
 
   .app-card-title {
     margin: 0 $small_space;
-  }
-}
 
-.app-card-body-container {
-  padding: $small_space $medium_space;
+    &.app-card-title-center {
+      margin: 0 auto;
+    }
+
+    &.app-card-title-regular {
+      font-weight: 400;
+    }
+
+    &.app-card-title-small {
+      font-size: $font-default;
+    }
+  }
 }
 
 .app-card-success {
@@ -37,5 +45,14 @@
   .app-card-title-container {
     color: $success-text-color;
     background-color: $success-border-color;
+  }
+}
+
+.app-card-dark-blue {
+  border: solid $medium_border $secondary-border-color;
+
+  .app-card-title-container {
+    color: $primary-background-color;
+    background-color: $secondary-border-color;
   }
 }

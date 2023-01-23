@@ -1,6 +1,15 @@
 <div class="app-card" [ngClass]="{'app-card-success': type === 'success'}">
   <div class="app-card-title-container">
-    <h1 class="app-card-title">{{ title }}</h1>
+    <h1
+      class="app-card-title"
+      [ngClass]="[
+        'app-card-title-' + titleSize,
+        'app-card-title-' + titleWeight,
+        'app-card-title-' + titlePosition
+      ]"
+    >
+      {{ title }}
+    </h1>
   </div>
 
   <div class="app-card-body-container">

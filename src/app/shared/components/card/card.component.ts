@@ -10,5 +10,8 @@ import { Component, Input } from "@angular/core";
 })
 export class CardComponent {
   @Input() title: string = "title";
-  @Input() type: "primary" | "success" = "primary"
+  @Input() titleSize: "large" | "small" | "default" = "default";
+  @Input() titleWeight: "bold" | "regular" = "bold";
+  @Input() titlePosition: "center" | "left" = "left";
+  @Input() type: "primary" | "success" | "dark-blue" = "primary"
 }
