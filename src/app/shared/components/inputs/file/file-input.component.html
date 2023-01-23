@@ -1,0 +1,33 @@
+<app-base-input [id]="id" [title]="title">
+  <app-card
+    type="dark-blue"
+    title="Upload"
+    titleSize="small"
+    titlePosition="center"
+    titleWeight="regular"
+  >
+    <div class="app-file-input">
+      <ng-container *ngIf="!value">
+        <img
+          src="/assets/icons/upload-64.png"
+          (click)="uploadActive && fileInput.click()">
+        <input
+          #fileInput
+          type="file"
+          accept="image/*"
+          (change)="handleUpload($event)">
+      </ng-container>
+
+      <ng-container *ngIf="value">
+        <img
+          [src]="value"
+          (click)="fileInput.click()">
+        <input
+          #fileInput
+          type="file"
+          accept="image/*"
+          (change)="handleUpload($event)">
+      </ng-container>
+    </div>
+  </app-card>
+</app-base-input>
