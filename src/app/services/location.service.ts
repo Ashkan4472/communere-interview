@@ -24,9 +24,9 @@ export class LocationService {
     this.addLocationToLocalStorage(newLocation);
   }
 
-  updateLocation(location: Location) {
-    this.updateLocationInSubject(location);
-    this.updateLocationInLocalStorage(location);
+  updateOrCreateLocation(location: Location) {
+    this.updateOrCreateLocationInSubject(location);
+    this.updateOrCreateLocationInLocalStorage(location);
   }
 
   removeLocation(id: string) {
@@ -85,7 +85,7 @@ export class LocationService {
     localStorage.setItem(`${LOC_ID_PREFIX}${newLocation.id}`, newLocation.toJsonString());
   }
 
-  private updateLocationInSubject(newLocation: Location) {
+  private updateOrCreateLocationInSubject(newLocation: Location) {
     const locations = this.locationSubject.value;
     const index = locations.findIndex((x) => x.id === newLocation.id)
     if (index === -1) {
@@ -96,7 +96,7 @@ export class LocationService {
     this.locationSubject.next(locations);
   }
 
-  private updateLocationInLocalStorage(newLocation: Location) {
+  private updateOrCreateLocationInLocalStorage(newLocation: Location) {
     const itemKey = `${LOC_ID_PREFIX}${newLocation.id}`;
 
     const locsStr = localStorage.getItem(itemKey);
