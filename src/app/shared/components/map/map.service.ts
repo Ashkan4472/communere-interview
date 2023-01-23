@@ -15,8 +15,11 @@ export class MapService {
 
   constructor(private injector: Injector) {
     // Register custom element for popup element
-    const DetailElement = createCustomElement(MapDetailComponent, { injector: this.injector });
-    customElements.define('map-detail-popup', DetailElement);
+    const oldElement = customElements.get('map-detail-popup');
+    if (!oldElement) {
+      const DetailElement = createCustomElement(MapDetailComponent, { injector: this.injector });
+      customElements.define('map-detail-popup', DetailElement);
+    }
   }
 
   setMap(newMap: L.Map) {
