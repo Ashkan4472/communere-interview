@@ -17,11 +17,11 @@ import { BaseInputComponent } from "../base-input.component";
 export class TextInputComponent {
   @Input() title: string = "Input"
   @Input() id!: string;
-  @Output() onChange: EventEmitter<string> = new EventEmitter();
+  @Input() value: string = "";
+  @Output() valueChange: EventEmitter<string> = new EventEmitter();
 
-  value: string = "";
 
   change() {
-    this.onChange.emit(this.value);
+    this.valueChange.emit(this.value ?? "");
   }
 }
