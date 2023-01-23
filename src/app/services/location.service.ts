@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable } from "rxjs";
 import { LOC_IDS, LOC_ID_PREFIX } from "../constants/keys/localstorage.keys";
 import { Location } from "../models/location.model";
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class LocationService {
   private locationSubject: BehaviorSubject<Location[]>;
   locations$: Observable<Location[]>;
@@ -15,6 +15,10 @@ export class LocationService {
   }
 
   addLocation(newLocation: Location) {
+    const index = this.locationSubject.value.findIndex((x) => x.id === newLocation.id)
+    if (index === -1) {
+      return;
+    }
     const newLocations = [...this.locationSubject.value, newLocation];
     this.locationSubject.next(newLocations)
     this.addLocationToLocalStorage(newLocation);
@@ -55,7 +59,7 @@ export class LocationService {
       try {
         const locStr = localStorage.getItem(`${LOC_ID_PREFIX}${locId}`)
         if (locStr) {
-          locations.push(JSON.parse(locStr))
+          locations.push(Location.fromJsonString(locStr))
         }
       } catch (error) {
         console.error(error);
@@ -78,8 +82,7 @@ export class LocationService {
     }
     locIds.push(newLocation.id);
 
-    const locStr = JSON.stringify(newLocation);
-    localStorage.setItem(`${LOC_ID_PREFIX}${newLocation.id}`, locStr);
+    localStorage.setItem(`${LOC_ID_PREFIX}${newLocation.id}`, newLocation.toJsonString());
   }
 
   private updateLocationInSubject(newLocation: Location) {
@@ -103,7 +106,7 @@ export class LocationService {
       return;
     }
 
-    localStorage.setItem(itemKey, JSON.stringify(newLocation))
+    localStorage.setItem(itemKey, newLocation.toJsonString())
 
   }
 
