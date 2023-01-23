@@ -4,7 +4,7 @@ import * as L from "leaflet";
 
 export class Location {
   private _id: string;
-  marker?: L.Marker;
+  private _marker?: L.Marker;
 
   constructor(
     public latLng?: L.LatLngTuple,
@@ -13,13 +13,29 @@ export class Location {
     public logo?: string,
   ) {
     this._id = uuid4()
+    this.latLng = latLng;
     if (latLng) {
-      this.marker = L.marker(latLng, { interactive: true });
+      this._marker = L.marker(latLng, { interactive: true });
     }
   }
 
   get id() {
     return this._id;
+  }
+
+  get marker() {
+    return this._marker;
+  }
+
+  updateLatLng(value?: L.LatLngTuple) {
+    this.latLng = value;
+    if (value) {
+      if (this._marker) {
+        this._marker.setLatLng(value)
+      } else {
+        this._marker = L.marker(value, { interactive: true });
+      }
+    }
   }
 
   toJsonString(): string {
