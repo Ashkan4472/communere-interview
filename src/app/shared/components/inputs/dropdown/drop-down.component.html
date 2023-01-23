@@ -1,0 +1,26 @@
+  <app-base-input [id]="id" [title]="title">
+    <button
+      class="app-drop-down-button"
+      aria-haspopup="listbox"
+      aria-labelledby="dropdown-label"
+      (click)="toggleDropdown()"
+      (clickOutside)="dropdownOpen = false"
+    >
+      <span class="app-drop-down-value">{{value}}</span>
+      <img class="app-drop-down-img" src="/assets/icons/down-arrow-64.png">
+    </button>
+
+    <ul
+      #dropDownList
+      class="app-drop-down-list"
+      [ngClass]="{'app-drop-down-open' : dropdownOpen}"
+      aria-expanded="false"
+    >
+      <li
+        *ngFor="let option of options"
+        [ngClass]="{'app-drop-down-selected' : value === option}"
+        (click)="select(option)"
+        tabindex="0"
+      >{{ option }}</li>
+    </ul>
+  </app-base-input>
