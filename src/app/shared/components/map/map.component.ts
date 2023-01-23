@@ -1,7 +1,7 @@
 import { CommonModule } from "@angular/common";
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from "@angular/core";
 import { LeafletModule } from "@asymmetrik/ngx-leaflet";
-import { tileLayer, latLng, MapOptions, marker, Map, LeafletMouseEvent, LatLng } from "leaflet";
+import { tileLayer, latLng, MapOptions, Map, LeafletMouseEvent, LatLng } from "leaflet";
 import { Location } from "src/app/models/location.model";
 import { CardComponent } from "../card/card.component";
 import { BaseInputComponent } from "../inputs/base-input.component";
@@ -20,7 +20,7 @@ import { MapService } from "./map.service";
   templateUrl: "./map.component.html",
   styleUrls: ["./map.component.scss"],
 })
-export class MapComponent implements OnInit {
+export class MapComponent implements OnInit, OnChanges {
   @Input() locations: Location[] = [];
   @Input() disableMarkerOnClick: boolean = true;
   @Input() useAspectRatio: boolean = false;
@@ -44,6 +44,10 @@ export class MapComponent implements OnInit {
     };
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    this.mapService.detectMarkerChanges(changes, this.disableMarkerOnClick)
+  }
+
   onMapClicked(event: LeafletMouseEvent) {
     if (!this.disableMarkerOnClick) {
       this.mapClicked!.emit(event.latlng)
@@ -55,10 +59,7 @@ export class MapComponent implements OnInit {
 
     // Set Markers
     for (const location of this.locations) {
-      marker(location.latLng, { interactive: true, })
-        .bindPopup((_l) => this.mapService.createDetailPopup(location))
-        .addTo(this.mapService.map!)
+      this.mapService.addMarker(location)
     }
   }
-
 }
