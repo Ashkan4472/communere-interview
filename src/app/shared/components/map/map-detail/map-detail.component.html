@@ -4,7 +4,8 @@
     <ul class="app-map-detail-body">
       <li>
         <strong>LatLng: </strong>
-        <span>{{ location.latLng }}</span>
+        <span>{{ location.latLng ? location.latLng[0] : "" }}</span>
+        <span>{{ location.latLng ? location.latLng[1] : "" }}</span>
       </li>
 
       <li *ngIf="location.name">
@@ -19,7 +20,7 @@
 
       <li *ngIf="location.logo">
         <strong>Logo: </strong>
-        <span>{{ location.logo }}</span>
+        <img [src]="location.logo">
       </li>
     </ul>
   </app-card>
