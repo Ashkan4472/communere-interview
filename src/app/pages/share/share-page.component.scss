@@ -1,0 +1,24 @@
+@import "sizes";
+
+.app-share-page {
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .app-card-container {
+    width: clamp($card-min-width, 50%, $card-max-width);
+  }
+
+  .app-share-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+
+    * {
+      margin: $extra_small_space;
+    }
+  }
+}

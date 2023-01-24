@@ -1,0 +1,43 @@
+<app-layout>
+  <div class="app-share-page">
+    <div class="app-card-container">
+      <app-card [title]="'Share Location'">
+        <div style="padding: 1rem;">
+          <app-text-input
+            id="location-name"
+            title="Location name:"
+            [value]="location.name ?? ''"
+            (valueChange)="location.name = $event"
+          ></app-text-input>
+
+          <app-map-input
+            id="location-latlng"
+            title="Location on map:"
+            [value]="location.latLng"
+            (valueChange)="location.updateLatLng($event)"
+          ></app-map-input>
+
+          <app-drop-down-input
+            id="location-type"
+            title="Location type:"
+            [options]="dropDownOptions"
+            [value]="location.locType"
+            (valueChange)="updateLocType($event)"
+          ></app-drop-down-input>
+
+          <app-file-input
+            id="location-logo"
+            title="Logo:"
+            [value]="location.logo"
+            (valueChange)="location.logo = $event"
+          ></app-file-input>
+        </div>
+      </app-card>
+
+      <div class="app-share-buttons">
+        <app-button [title]="'Cancel'" (onClick)="navigateHome()" [type]="'secondary'"></app-button>
+        <app-button [title]="'Save'" (click)="submit()"></app-button>
+      </div>
+    </div>
+  </div>
+</app-layout>
