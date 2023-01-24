@@ -17,12 +17,7 @@ export class LocationService {
   }
 
   addLocation(newLocation: Location) {
-    const index = this.locationSubject.value.findIndex((x) => x.id === newLocation.id)
-    if (index === -1) {
-      return;
-    }
-    const newLocations = [...this.locationSubject.value, newLocation];
-    this.locationSubject.next(newLocations)
+    this.addLocationToSubject(newLocation);
     this.addLocationToLocalStorage(newLocation);
   }
 
@@ -42,6 +37,7 @@ export class LocationService {
   private getLocationsFromLocalStorage(): Location[] {
     const locIdsStr = localStorage.getItem(LOC_IDS);
     if (!locIdsStr) {
+      localStorage.setItem(LOC_IDS, "[]");
       return [];
     }
 
@@ -71,31 +67,38 @@ export class LocationService {
     return locations;
   }
 
+  private addLocationToSubject(newLocation: Location) {
+    const newLocations = [...this.locationSubject.getValue(), newLocation];
+    this.locationSubject.next(newLocations)
+  }
+
   private addLocationToLocalStorage(newLocation: Location) {
-    const locIdsStr = localStorage.getItem(LOC_IDS) || "[]";
+    const locIdsStr = localStorage.getItem(LOC_IDS);
 
     let locIds: string[];
     // Check if can parse saved location ids
     try {
-      locIds = JSON.parse(locIdsStr);
+      locIds = JSON.parse(locIdsStr!);
     } catch (error) {
       console.error(error);
       locIds = [];
     }
     locIds.push(newLocation.id);
+    localStorage.setItem(`${LOC_IDS}`, JSON.stringify(locIds))
 
     localStorage.setItem(`${LOC_ID_PREFIX}${newLocation.id}`, newLocation.toJsonString());
   }
 
   private updateOrCreateLocationInSubject(newLocation: Location) {
-    const locations = this.locationSubject.value;
+    const locations = this.locationSubject.getValue();
     const index = locations.findIndex((x) => x.id === newLocation.id)
-    if (index === -1) {
+    if (index !== -1) {
+      locations[index] = newLocation
+      this.locationSubject.next(locations);
+    } else {
       // No location found with that id so create it
       this.addLocation(newLocation);
     }
-    locations[index] = newLocation
-    this.locationSubject.next(locations);
   }
 
   private updateOrCreateLocationInLocalStorage(newLocation: Location) {
@@ -113,7 +116,7 @@ export class LocationService {
   }
 
   private removeLocationInSubject(id: string) {
-    const locations = this.locationSubject.value;
+    const locations = this.locationSubject.getValue();
     const index = locations.findIndex((x) => x.id === id);
     if (index !== -1) {
       locations.splice(index)
