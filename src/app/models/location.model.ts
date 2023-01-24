@@ -40,6 +40,7 @@ export class Location {
 
   toJsonString(): string {
     return JSON.stringify({
+      id: this.id,
       latLng: this.latLng,
       locType: this.locType,
       name: this.name,
