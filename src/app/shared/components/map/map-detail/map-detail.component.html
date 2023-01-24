@@ -25,9 +25,8 @@
     </ul>
   </app-card>
 
-
   <div class="app-map-detail-buttons">
-    <app-button title="Edit" type="warn"></app-button>
-    <app-button title="Close" (click)="closePopup()"></app-button>
+    <app-button title="Edit" (onClick)="editLocation()" type="warn"></app-button>
+    <app-button title="Close" (onClick)="closePopup()"></app-button>
   </div>
 </div>
