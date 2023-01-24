@@ -4,6 +4,6 @@
     [useAspectRatio]="true"
     [disableMarkerOnClick]="false"
     (mapClicked)="onValueChange($event)"
-    [locations]="value ? [mockLocation] : []"
+    [locations]="value ? [mockLocation!] : []"
   ></app-map>
 </app-base-input>
