@@ -16,6 +16,18 @@ export class LocationService {
     this.locations$ = this.locationSubject.asObservable();
   }
 
+  fetchLocation(id: string) {
+    const locStr = localStorage.getItem(`${LOC_ID_PREFIX}${id}`)
+    if (locStr) {
+      try {
+        return Location.fromJsonString(locStr);
+      } catch (error) {
+        throw error;
+      }
+    }
+    return undefined;
+  }
+
   addLocation(newLocation: Location) {
     this.addLocationToSubject(newLocation);
     this.addLocationToLocalStorage(newLocation);
